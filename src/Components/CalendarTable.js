@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Day, FullYear, myMonth, alldays } from '../DataHelper/DataHelper'
+import {alldays, GetDay, GetLastDay} from '../DataHelper/DataHelper'
 import Year from './Year';
 import Month from './Month';
 import Week from './Week';
@@ -7,23 +7,39 @@ const week = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Friday', 'Satur'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export default function CalendarTable() {
-    const [weekday, setweekday] = useState(Day('2020, 1, 1'))
-    const [year, setyear] = useState(FullYear('2020, 1, 1'))
-    const [month, setmonth] = useState(myMonth('2020, 1, 1'))
+    const GetData = new Date();   
+   let [m, SetM] = useState(GetData.getMonth())
+   let [y, SetY] = useState(GetData.getFullYear())
+    let weekday = GetDay(y, m, 1);
     const SetNext = () => {
-        setmonth(month + 1)
-        if (months[month] === 'December') {
-            setmonth(month - 11)
-            setyear(year + 1)
+       GetData.setMonth(m +=1)
+       SetM(m)
+       if (m === 12) {
+        GetData.setMonth(m-12)
+        SetM(m-=12)
+        GetData.setFullYear(y +=1)
+        SetY(y)
+       }
+    }
+    const SetPrevious = () => {
+        GetData.setMonth(m -=1)
+        SetM(m)
+        console.log(m);
+        if (m < 0) {
+            GetData.setMonth(m+12)
+            SetM(m+=12)
+            GetData.setFullYear(y -=1)
+            SetY(y)
         }
     }
-    let arr = alldays(weekday)
+    let LastDay = GetLastDay(y, m, 1);
+    let arr = alldays(weekday, LastDay)
     return (
         <>
             <table>
                 <thead>
-                    <Year year={year} />
-                    <Month m={months[month]} />
+                    <Year year={y} />
+                    <Month m={months[m]} />
                     <Week weekdays={week} />
                 </thead>
                 <tbody>
@@ -31,7 +47,7 @@ export default function CalendarTable() {
                 </tbody>
             </table>
             <div className='controls'>
-                <button> Previous </button>
+                <button onClick={SetPrevious}> Previous </button>
                 <button onClick={SetNext}> Next </button>
             </div>
         </>
