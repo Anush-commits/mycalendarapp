@@ -26,15 +26,32 @@ color: #282c34;
 }
 
 button {
- padding: 1em 5em;
-  height: 200px;
-  font-size: 70%;
+ padding: 1em 2em;
+  font-size: 1em;
  margin: 10em auto;
   background-color: teal;
+  color: aliceblue;
+  font-weight: 700;
 }
 .controls {
   display: flex;
   flex-direction: row;
  width: 70%;
   margin: 0 auto;
+}
+h1, label {
+  color: #282c34;
+}
+label, input {
+  font-size: 1em;
+}
+input {
+  border: 2px solid teal;
+  display: inline-block;
+  width: 13em;
+  padding: 0.5em;
+  margin: 2em 1em;
+}
+form > label {
+  display: block;
 }
