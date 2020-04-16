@@ -4,6 +4,7 @@ import Year from './Year';
 import Month from './Month';
 import Week from './Week';
 import UserInput from './UserInput';
+import AddDayName from '../DataHelper/AddDayName';
 const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -38,7 +39,7 @@ export default function CalendarTable() {
         }
     }
     let LastDay = GetLastDay(y, m, 1);
-    let arr = alldays(weekday, LastDay)
+    let arr = alldays(weekday, LastDay, GetData.getDate())
     let SetYearInput = null;
     if (toggle === true) {
         SetYearInput = <UserInput label="Write year:" placeholder="Year" ChangeHandler={e => {SetUserYear(e.target.value)}}/>
@@ -54,7 +55,6 @@ export default function CalendarTable() {
         } else {
             const SetUserDate = new Date(UserYear, UserMonth, UserDay);
            let FoundDay = SetUserDate.getDay();
-           console.log(week[FoundDay]);
            setUserResult( week[FoundDay] )
         }
         
@@ -75,6 +75,7 @@ export default function CalendarTable() {
                 <button onClick={SetPrevious}> Previous </button>
                 <button onClick={SetNext}> Next </button>
             </div>
+            <AddDayName/>
             <form>
                 <UserInput label="Write month:" placeholder="Month" ChangeHandler={e => {setUserMonth(e.target.value)}} />
                 <UserInput label="Write day:" placeholder="Day" ChangeHandler={e => {setUserDay(e.target.value)}}/>

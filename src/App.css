@@ -28,16 +28,15 @@ color: #282c34;
 button {
  padding: 1em 2em;
   font-size: 1em;
- margin: 10em auto;
   background-color: teal;
   color: aliceblue;
   font-weight: 700;
+  border: transparent;
 }
 .controls {
   display: flex;
-  flex-direction: row;
- width: 70%;
-  margin: 0 auto;
+ justify-content: space-around;
+ margin-top: 7em;
 }
 h1, label {
   color: #282c34;
@@ -55,3 +54,23 @@ input {
 form > label {
   display: block;
 }
+.add {
+  border-radius: 70%;
+  width: 3em; height: 3em;
+  padding: 0%;
+  background-color: #d63447;
+  position: fixed;
+  bottom: 8%;
+  right: 1%;
+}
+@media only screen and (max-width: 800px) {
+  
+  .add { 
+    bottom: calc(100vh - 63vh);
+  }
+}
+@media (min-width: 800px) and (max-width: 1000px){
+  .add {
+    bottom: calc(100vh - 78vh);
+  }
+ }
